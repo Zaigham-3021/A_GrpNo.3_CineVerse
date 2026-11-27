@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 560" role="img" aria-label="Neon Shadows movie poster">
+  <defs>
+    <linearGradient id="neonBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="560" rx="16" fill="url(#neonBg)"/>
+  <rect x="65" y="130" width="55" height="240" fill="#131c36" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="140" y="85" width="70" height="285" fill="#0f172a" stroke="#e50914" stroke-width="2"/>
+  <rect x="230" y="115" width="60" height="255" fill="#131c36" stroke="#f5c518" stroke-width="2"/>
+  <rect x="305" y="155" width="45" height="215" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="0" y="370" width="400" height="190" fill="#070b14"/>
+  <text x="200" y="452" text-anchor="middle" fill="#38bdf8" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="4">DOLBY ATMOS</text>
+  <text x="200" y="490" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="2">NEON SHADOWS</text>
+  <text x="200" y="520" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, Arial, sans-serif" font-size="12" letter-spacing="2">ACTION • THRILLER • 2H 12M</text>
+</svg>
