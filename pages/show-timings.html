@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Show Timings | CineVerse</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- Site Header & Responsive Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="../index.html" class="brand-logo" aria-label="CineVerse Home">
+        <span class="brand-badge" aria-hidden="true">CV</span>
+        <span>Cine<span class="brand-highlight">Verse</span></span>
+      </a>
+
+      <button
+        type="button"
+        id="hamburgerBtn"
+        class="hamburger-btn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <nav aria-label="Primary Navigation">
+        <ul id="primaryNav" class="nav-links">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="select-cinema.html" class="nav-link">Select Cinema</a></li>
+          <li><a href="show-timings.html" class="nav-link active">Show Timings</a></li>
+          <li><a href="seat-selection.html" class="nav-link">Seat Selection</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <nav class="booking-steps" aria-label="Booking progress">
+        <div class="step-item completed">
+          <span class="step-number">&#10003;</span>
+          <span>Select Cinema</span>
+        </div>
+        <span class="step-divider" aria-hidden="true">/</span>
+        <div class="step-item active" aria-current="step">
+          <span class="step-number">2</span>
+          <span>Show Timings</span>
+        </div>
+        <span class="step-divider" aria-hidden="true">/</span>
+        <div class="step-item">
+          <span class="step-number">3</span>
+          <span>Seat Selection</span>
+        </div>
+      </nav>
+
+      <section class="page-hero">
+        <div class="hero-text">
+          <h1>Show Timings</h1>
+          <p id="bookingContextSummary">Loading your selected cinema...</p>
+        </div>
+        <div class="landing-actions">
+          <a href="select-cinema.html" class="btn btn-secondary">Change Cinema</a>
+          <a href="seat-selection.html" class="btn btn-primary">Continue to Seat Selection</a>
+        </div>
+      </section>
+
+      <section class="info-panel">
+        <h2>Show Timings Module (Base Starter Page)</h2>
+        <p>
+          This page is ready for movie schedules and showtime slots. Your selected city
+          and cinema have been persisted via <code>localStorage</code> from
+          <code>select-cinema.html</code>.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 CineVerse &mdash; Cinema Ticket Booking.</p>
+      <p>Step 2 of 3: Show Timings</p>
+    </div>
+  </footer>
+
+  <script src="../js/booking.js"></script>
+</body>
+</html>

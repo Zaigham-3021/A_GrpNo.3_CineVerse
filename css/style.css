@@ -1,0 +1,641 @@
+/* ==========================================================================
+   CineVerse - Main Stylesheet
+   Semantic layout using CSS3 Flexbox, Grid, and responsive media queries.
+   ========================================================================== */
+
+/* 1. CSS Custom Properties (Theme Variables) */
+:root {
+  --color-bg: #0b0f19;
+  --color-bg-elevated: #121826;
+  --color-surface: #161f33;
+  --color-surface-hover: #1d2842;
+  --color-border: #26324d;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-primary: #e50914;
+  --color-primary-hover: #f41b26;
+  --color-accent: #f5c518;
+  --color-success: #10b981;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --transition-fast: 0.2s ease;
+  --max-width: 1200px;
+}
+
+/* 2. Base Reset & Typography */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+select {
+  font-family: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 3. Header & Responsive Navigation (Flexbox + Mobile Hamburger) */
+.site-header {
+  background-color: rgba(11, 15, 25, 0.94);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+  position: relative;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-primary), #b20710);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.brand-highlight {
+  color: var(--color-accent);
+}
+
+/* Hamburger button (visible on mobile) */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 0 9px;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+.nav-link.active {
+  color: #ffffff;
+  background-color: var(--color-primary);
+}
+
+/* 4. Main Content & Booking Progress Stepper */
+.main-content {
+  flex: 1;
+  padding: 2rem 0 3.5rem;
+}
+
+.booking-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+  padding: 0.9rem 1.1rem;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.step-item.active {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.step-item.active .step-number {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.step-item.completed {
+  color: var(--color-success);
+}
+
+.step-item.completed .step-number {
+  background-color: rgba(16, 185, 129, 0.18);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.step-divider {
+  color: var(--color-border);
+}
+
+/* 5. Page Hero & Filter Bar */
+.page-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero-text h1 {
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+  line-height: 1.2;
+  margin-bottom: 0.45rem;
+}
+
+.hero-text p {
+  color: var(--color-text-muted);
+  max-width: 620px;
+}
+
+.city-filter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 230px;
+}
+
+.city-filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.city-select {
+  appearance: none;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 2.25rem 0.7rem 0.95rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
+    linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  transition: border-color var(--transition-fast);
+}
+
+.city-select:hover,
+.city-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+/* Results summary & saved selection banner */
+.results-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.results-count {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.saved-selection-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background-color: rgba(245, 197, 24, 0.12);
+  border: 1px solid rgba(245, 197, 24, 0.35);
+  color: var(--color-accent);
+  font-size: 0.88rem;
+}
+
+/* 6. Cinema Cards Grid (CSS Grid) */
+.cinema-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.cinema-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-fast), border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.cinema-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-hover);
+}
+
+.cinema-card.is-selected {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.35), var(--shadow-card);
+}
+
+.cinema-card-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background-color: var(--color-bg-elevated);
+  overflow: hidden;
+}
+
+.cinema-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.distance-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: rgba(11, 15, 25, 0.88);
+  color: var(--color-accent);
+  border: 1px solid rgba(245, 197, 24, 0.4);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cinema-card-body {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.8rem;
+}
+
+.cinema-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.cinema-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.cinema-rating {
+  flex-shrink: 0;
+  background-color: rgba(16, 185, 129, 0.14);
+  color: var(--color-success);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 0.18rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.cinema-location {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.cinema-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.feature-tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: #cbd5e1;
+}
+
+.cinema-card-footer {
+  margin-top: auto;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.screens-info {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* 7. Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  background-color: var(--color-surface-hover);
+}
+
+/* 8. Home Landing & Starter Page Sections */
+.landing-banner {
+  background: linear-gradient(135deg, #161f33 0%, #0d1322 65%, #2a0c13 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.landing-eyebrow {
+  display: inline-block;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.6rem;
+}
+
+.landing-banner h1 {
+  font-size: clamp(1.9rem, 3.6vw, 2.75rem);
+  line-height: 1.15;
+  margin-bottom: 0.85rem;
+}
+
+.landing-banner p {
+  color: var(--color-text-muted);
+  margin-bottom: 1.4rem;
+  max-width: 56ch;
+}
+
+.landing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.info-panel {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.info-panel h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.65rem;
+}
+
+.info-panel p {
+  color: var(--color-text-muted);
+}
+
+.starter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+}
+
+/* 9. Footer */
+.site-footer {
+  background-color: var(--color-bg-elevated);
+  border-top: 1px solid var(--color-border);
+  padding: 1.4rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+/* 10. Responsive Breakpoints (Tablet & Mobile) */
+@media (max-width: 992px) {
+  .cinema-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .landing-banner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  .nav-links.is-open {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+
+  .cinema-grid,
+  .starter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .city-filter-box {
+    width: 100%;
+  }
+}

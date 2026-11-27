@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Cinema | CineVerse</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- Site Header & Responsive Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="../index.html" class="brand-logo" aria-label="CineVerse Home">
+        <span class="brand-badge" aria-hidden="true">CV</span>
+        <span>Cine<span class="brand-highlight">Verse</span></span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        type="button"
+        id="hamburgerBtn"
+        class="hamburger-btn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <nav aria-label="Primary Navigation">
+        <ul id="primaryNav" class="nav-links">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="select-cinema.html" class="nav-link active">Select Cinema</a></li>
+          <li><a href="show-timings.html" class="nav-link">Show Timings</a></li>
+          <li><a href="seat-selection.html" class="nav-link">Seat Selection</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Booking Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Booking Progress Indicator -->
+      <nav class="booking-steps" aria-label="Booking progress">
+        <div class="step-item active" aria-current="step">
+          <span class="step-number">1</span>
+          <span>Select Cinema</span>
+        </div>
+        <span class="step-divider" aria-hidden="true">/</span>
+        <div class="step-item">
+          <span class="step-number">2</span>
+          <span>Show Timings</span>
+        </div>
+        <span class="step-divider" aria-hidden="true">/</span>
+        <div class="step-item">
+          <span class="step-number">3</span>
+          <span>Seat Selection</span>
+        </div>
+      </nav>
+
+      <!-- Page Title & City Selector -->
+      <section class="page-hero" aria-labelledby="selectCinemaHeading">
+        <div class="hero-text">
+          <h1 id="selectCinemaHeading">Select Your Cinema</h1>
+          <p>
+            Choose your city and preferred theater below. Your selection is saved
+            automatically before moving to show timings.
+          </p>
+        </div>
+
+        <div class="city-filter-box">
+          <label for="citySelect" class="city-filter-label">Select City</label>
+          <select id="citySelect" name="city" class="city-select">
+            <option value="Islamabad" selected>Islamabad</option>
+            <option value="Rawalpindi">Rawalpindi</option>
+            <option value="Lahore">Lahore</option>
+            <option value="Karachi">Karachi</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Results Summary & Saved Selection Pill -->
+      <div class="results-toolbar">
+        <p id="resultsCount" class="results-count" aria-live="polite">
+          Loading cinemas...
+        </p>
+        <p id="savedSelectionBanner" class="saved-selection-pill" hidden></p>
+      </div>
+
+      <!-- Dynamic Cinema Cards Grid (populated by js/booking.js) -->
+      <section id="cinemaGrid" class="cinema-grid" aria-label="Available Cinemas">
+        <noscript>
+          <p class="empty-state">
+            Please enable JavaScript to view and select available cinemas.
+          </p>
+        </noscript>
+      </section>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 CineVerse &mdash; Cinema Ticket Booking.</p>
+      <p>Step 1 of 3: Cinema Selection</p>
+    </div>
+  </footer>
+
+  <script src="../js/booking.js"></script>
+</body>
+</html>
