@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+  <defs>
+    <radialGradient id="wormhole" cx="50%" cy="42%" r="52%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="14%" stop-color="#00D4FF"/>
+      <stop offset="42%" stop-color="#8B5CF6"/>
+      <stop offset="75%" stop-color="#171A32"/>
+      <stop offset="100%" stop-color="#090B1A"/>
+    </radialGradient>
+    <linearGradient id="shipBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="50%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="thruster" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="rgba(0,212,255,0)"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="900" fill="#090B1A"/>
+  <rect width="600" height="900" fill="url(#wormhole)" opacity="0.92"/>
+  <g fill="#FFFFFF" opacity="0.75">
+    <circle cx="80" cy="110" r="1.8"/><circle cx="150" cy="60" r="1.2"/><circle cx="490" cy="130" r="2"/>
+    <circle cx="530" cy="240" r="1.4"/><circle cx="65" cy="340" r="1.5"/><circle cx="510" cy="690" r="1.8"/>
+    <circle cx="110" cy="760" r="2.1"/><circle cx="430" cy="810" r="1.3"/><circle cx="240" cy="840" r="1.6"/>
+  </g>
+  <g fill="none" stroke="#00D4FF" opacity="0.35">
+    <ellipse cx="300" cy="378" rx="185" ry="95" transform="rotate(-18 300 378)" stroke-width="2"/>
+    <ellipse cx="300" cy="378" rx="245" ry="125" transform="rotate(-18 300 378)" stroke-width="1.2" stroke="#8B5CF6"/>
+    <ellipse cx="300" cy="378" rx="125" ry="62" transform="rotate(-18 300 378)" stroke-width="2.5"/>
+  </g>
+  <!-- Starship Silhouette -->
+  <g transform="translate(300,610) rotate(-14)">
+    <polygon points="0,45 -18,175 18,175" fill="url(#thruster)" opacity="0.85"/>
+    <polygon points="0,-135 -26,25 -80,75 -22,58 0,72 22,58 80,75 26,25" fill="url(#shipBody)"/>
+    <polygon points="0,-110 -8,-10 0,35 8,-10" fill="#00D4FF" opacity="0.65"/>
+    <circle cx="-12" cy="62" r="4" fill="#00D4FF"/>
+    <circle cx="12" cy="62" r="4" fill="#00D4FF"/>
+  </g>
+</svg>
