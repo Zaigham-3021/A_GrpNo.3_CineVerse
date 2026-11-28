@@ -459,56 +459,105 @@
   }
 
   // ---------------------------------------------------------------------------
-  // ---------------------------------------------------------------------------
   // 7. Seat Selection Page Logic
   // ---------------------------------------------------------------------------
 
   function initSeatSelection() {
-    const seatGrid = document.getElementById('seatGrid');
-    const totalPriceEl = document.getElementById('totalPrice');
-    const errorMsg = document.getElementById('seatSelectionErrorMsg');
-    const nextBtn = document.getElementById('nextToConfirmBtn');
-    const modal = document.getElementById('bookingModal');
-    const modalSeats = document.getElementById('modalSeats');
+    const seatGrid    = document.getElementById('seatGrid');
+    const totalPriceEl= document.getElementById('totalPrice');
+    const errorMsg    = document.getElementById('seatSelectionErrorMsg');
+    const nextBtn     = document.getElementById('nextToConfirmBtn');
+    const modal       = document.getElementById('bookingModal');
+    const modalSeats  = document.getElementById('modalSeats');
     const modalCinema = document.getElementById('modalCinema');
     const modalDateTime = document.getElementById('modalDateTime');
-    const modalTotal = document.getElementById('modalTotal');
-    const modalClose = document.getElementById('modalCloseBtn');
+    const modalTotal  = document.getElementById('modalTotal');
+    const modalClose  = document.getElementById('modalCloseBtn');
+
+    // Guard — only run on the seat-selection page
+    if (!seatGrid || !nextBtn || !modal) { return; }
+
+    // Ensure modal is hidden on page load (defensive, matches the hidden attr)
+    modal.hidden = true;
 
     const PRICE_PER_SEAT = 600;
     const MAX_SEATS = 8;
-    const rows = ['A','B','C','D','E','F'];
-    const cols = 8;
-    const bookedSeats = ['C3', 'D5', 'E1']; // preset booked seats
+    const ROWS = ['A', 'B', 'C', 'D', 'E', 'F'];
+    const COLS = 8;
 
-    // Load persisted selection
+    // Pre-booked seats — red and unclickable
+    const BOOKED_SEATS = ['A3', 'B6', 'C2', 'C5', 'D1', 'D7', 'E4', 'F3', 'F6'];
+
+    // ----- Context / fallback -------------------------------------------------
     const savedState = getSavedBookingState() || {};
-    let selectedSeats = savedState.seats || [];
 
+    // If no cinema/date/time in localStorage show a fallback message and bail
+    const contextEl = document.getElementById('bookingContextSummary');
+    if (!savedState.cinemaName || !savedState.dateLabel || !savedState.timeLabel) {
+      if (contextEl) {
+        contextEl.innerHTML =
+          'Missing booking details. Please <a href="select-cinema.html" ' +
+          'style="color:var(--color-accent);text-decoration:underline;">select a cinema</a> ' +
+          'and <a href="show-timings.html" ' +
+          'style="color:var(--color-accent);text-decoration:underline;">choose a showtime</a> first.';
+      }
+      // Disable the confirm button while context is missing
+      if (nextBtn) { nextBtn.disabled = true; nextBtn.style.opacity = '0.5'; }
+    } else {
+      if (contextEl) {
+        contextEl.innerHTML =
+          '<strong>' + savedState.cinemaName + '</strong>' +
+          ' &bull; ' + savedState.dateLabel +
+          ' &bull; ' + savedState.timeLabel;
+      }
+    }
+
+    // Restore previously selected seats from localStorage
+    let selectedSeats = Array.isArray(savedState.seats) ? savedState.seats.slice() : [];
+
+    // ----- Render seat grid ---------------------------------------------------
     function renderGrid() {
       seatGrid.innerHTML = '';
-      rows.forEach(row => {
+      ROWS.forEach(function (row) {
+        const rowLabel = document.createElement('span');
+        rowLabel.className = 'seat-row-label';
+        rowLabel.setAttribute('aria-hidden', 'true');
+        rowLabel.textContent = row;
+
         const rowDiv = document.createElement('div');
         rowDiv.className = 'seat-row';
-        for (let i = 1; i <= cols; i++) {
-          const seatLabel = row + i;
-          const btn = document.createElement('button');
+        rowDiv.setAttribute('role', 'row');
+        rowDiv.setAttribute('aria-label', 'Row ' + row);
+        rowDiv.appendChild(rowLabel);
+
+        for (var i = 1; i <= COLS; i++) {
+          var seatLabel = row + i;
+          var btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'seat';
           btn.dataset.seat = seatLabel;
-          btn.setAttribute('aria-label', `Seat ${seatLabel}`);
           btn.textContent = seatLabel;
-          if (bookedSeats.includes(seatLabel)) {
+
+          if (BOOKED_SEATS.indexOf(seatLabel) > -1) {
             btn.classList.add('booked');
             btn.disabled = true;
+            btn.setAttribute('aria-label', 'Seat ' + seatLabel + ', booked');
             btn.setAttribute('aria-pressed', 'false');
-          } else if (selectedSeats.includes(seatLabel)) {
+          } else if (selectedSeats.indexOf(seatLabel) > -1) {
             btn.classList.add('selected');
+            btn.setAttribute('aria-label', 'Seat ' + seatLabel + ', selected');
             btn.setAttribute('aria-pressed', 'true');
           } else {
+            btn.setAttribute('aria-label', 'Seat ' + seatLabel + ', available');
             btn.setAttribute('aria-pressed', 'false');
           }
-          btn.addEventListener('click', () => toggleSeat(seatLabel, btn));
+
+          btn.addEventListener('click', function () {
+            toggleSeat(this.dataset.seat, this);
+          });
+
+          // Keyboard: Space/Enter already fire click on buttons; also handle
+          // arrow-key navigation between seat buttons
           rowDiv.appendChild(btn);
         }
         seatGrid.appendChild(rowDiv);
@@ -517,50 +566,83 @@
     }
 
     function toggleSeat(seat, button) {
-      const idx = selectedSeats.indexOf(seat);
+      if (button.disabled) { return; }
+      var idx = selectedSeats.indexOf(seat);
       if (idx > -1) {
         selectedSeats.splice(idx, 1);
         button.classList.remove('selected');
         button.setAttribute('aria-pressed', 'false');
+        button.setAttribute('aria-label', 'Seat ' + seat + ', available');
       } else {
         if (selectedSeats.length >= MAX_SEATS) {
-          return; // max reached
+          // Show max-seat warning briefly
+          if (errorMsg) {
+            errorMsg.textContent = 'Maximum ' + MAX_SEATS + ' seats allowed!';
+            errorMsg.hidden = false;
+            setTimeout(function () { errorMsg.hidden = true; }, 3000);
+          }
+          return;
         }
         selectedSeats.push(seat);
         button.classList.add('selected');
         button.setAttribute('aria-pressed', 'true');
+        button.setAttribute('aria-label', 'Seat ' + seat + ', selected');
       }
-      saveSelection();
+      // Hide generic error when user is making a selection
+      if (errorMsg) { errorMsg.hidden = true; }
+      persistSeats();
       updateTotal();
     }
 
     function updateTotal() {
-      const total = selectedSeats.length * PRICE_PER_SEAT;
-      totalPriceEl.textContent = `Total: Rs. ${total}`;
+      if (totalPriceEl) {
+        totalPriceEl.textContent = 'Total: Rs. ' + (selectedSeats.length * PRICE_PER_SEAT);
+      }
     }
 
-    function saveSelection() {
-      const state = getSavedBookingState() || {};
+    function persistSeats() {
+      var state = getSavedBookingState() || {};
       state.seats = selectedSeats;
-      try { localStorage.setItem(STORAGE_KEYS.BOOKING_STATE, JSON.stringify(state)); } catch (e) {}
+      try {
+        localStorage.setItem(STORAGE_KEYS.BOOKING_STATE, JSON.stringify(state));
+      } catch (e) {
+        console.warn('Could not persist seat selection:', e);
+      }
     }
 
-    nextBtn.addEventListener('click', () => {
+    // ----- Confirm button -----------------------------------------------------
+    nextBtn.addEventListener('click', function () {
       if (selectedSeats.length === 0) {
-        errorMsg.hidden = false;
+        if (errorMsg) {
+          errorMsg.textContent = 'Select at least one seat!';
+          errorMsg.hidden = false;
+        }
         return;
       }
-      errorMsg.hidden = true;
-      modalSeats.textContent = `Seats: ${selectedSeats.join(', ')}`;
-      const saved = getSavedBookingState();
-      modalCinema.textContent = `Cinema: ${saved?.cinemaName || ''}`;
-      modalDateTime.textContent = `Date & Time: ${saved?.dateLabel || ''} ${saved?.timeLabel || ''}`;
-      modalTotal.textContent = `Total: Rs. ${selectedSeats.length * PRICE_PER_SEAT}`;
+      if (errorMsg) { errorMsg.hidden = true; }
+
+      var state = getSavedBookingState() || {};
+      if (modalSeats)   { modalSeats.textContent   = 'Seats: '      + selectedSeats.join(', '); }
+      if (modalCinema)  { modalCinema.textContent  = 'Cinema: '     + (state.cinemaName || '—'); }
+      if (modalDateTime){ modalDateTime.textContent= 'Date & Time: '+ (state.dateLabel || '') + ' ' + (state.timeLabel || ''); }
+      if (modalTotal)   { modalTotal.textContent   = 'Total: Rs. '  + (selectedSeats.length * PRICE_PER_SEAT); }
+
       modal.hidden = false;
+      // Focus the close button for accessibility
+      if (modalClose) { modalClose.focus(); }
     });
 
-    modalClose.addEventListener('click', () => { modal.hidden = true; });
+    // ----- Modal close --------------------------------------------------------
+    if (modalClose) {
+      modalClose.addEventListener('click', function () { modal.hidden = true; });
+    }
 
+    // Close modal on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) { modal.hidden = true; }
+    });
+
+    // ----- Initial render -----------------------------------------------------
     renderGrid();
   }
 

@@ -42,6 +42,8 @@
   <!-- Main Content -->
   <main class="main-content">
     <div class="container">
+
+      <!-- Booking Progress Stepper -->
       <nav class="booking-steps" aria-label="Booking progress">
         <div class="step-item completed">
           <span class="step-number">&#10003;</span>
@@ -59,6 +61,7 @@
         </div>
       </nav>
 
+      <!-- Page Hero -->
       <section class="page-hero">
         <div class="hero-text">
           <h1>Seat Selection</h1>
@@ -69,13 +72,41 @@
         </div>
       </section>
 
-      <section class="info-panel">
-        <h2>Seat Map Module (Base Starter Page)</h2>
-        <p>
-          This page is ready for the interactive seat grid and ticket checkout summary.
-        </p>
+      <!-- Seat Legend -->
+      <section class="seat-legend-section" aria-label="Seat legend">
+        <h2 class="seat-legend-title">Seat Legend</h2>
+        <ul class="seat-legend-list">
+          <li><span class="seat available" aria-hidden="true"></span> Available</li>
+          <li><span class="seat booked"    aria-hidden="true"></span> Booked</li>
+          <li><span class="seat selected"  aria-hidden="true"></span> Selected</li>
+        </ul>
+        <div class="screen-bar" role="img" aria-label="Cinema screen">SCREEN</div>
       </section>
-    </div>
+
+      <!-- Seat Grid -->
+      <section class="seat-selection-section">
+        <div
+          id="seatGrid"
+          class="seat-grid"
+          role="group"
+          aria-label="Seat map — rows A to F, 8 seats per row"
+        ></div>
+
+        <!-- Summary & Actions -->
+        <div class="selection-summary">
+          <p id="totalPrice" class="total-price">Total: Rs. 0</p>
+          <p
+            id="seatSelectionErrorMsg"
+            class="error-msg"
+            role="alert"
+            aria-live="polite"
+            hidden
+          >Select at least one seat!</p>
+          <button id="nextToConfirmBtn" class="btn btn-primary">Confirm Booking</button>
+        </div>
+      </section>
+
+    </div><!-- /.container -->
   </main>
 
   <!-- Site Footer -->
@@ -86,21 +117,17 @@
     </div>
   </footer>
 
-  <script src="../js/booking.js"></script>
-  <!-- Seat Selection Module -->
-  <section class="container seat-selection">
-    <div id="seatGrid" class="seat-grid" aria-label="Seat map"></div>
-    <div class="selection-summary">
-      <p id="totalPrice">Total: Rs. 0</p>
-      <p id="seatSelectionErrorMsg" class="error-msg" hidden>Select at least one seat!</p>
-      <button id="nextToConfirmBtn" class="btn btn-primary">Next</button>
-    </div>
-  </section>
-
-  <!-- Booking Confirmation Modal -->
-  <div id="bookingModal" class="modal" role="dialog" aria-modal="true" hidden>
+  <!-- Booking Confirmation Modal (hidden by default) -->
+  <div
+    id="bookingModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalHeading"
+    hidden
+  >
     <div class="modal-content">
-      <h2>Booking Confirmed</h2>
+      <h2 id="modalHeading">Booking Confirmed</h2>
       <p id="modalSeats"></p>
       <p id="modalCinema"></p>
       <p id="modalDateTime"></p>
@@ -108,5 +135,7 @@
       <button id="modalCloseBtn" class="btn btn-secondary">Close</button>
     </div>
   </div>
+
+  <script src="../js/booking.js"></script>
 </body>
 </html>
