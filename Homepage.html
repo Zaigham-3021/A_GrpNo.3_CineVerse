@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="CineVerse — Discover trending movies, explore upcoming releases, and navigate to cinema ticket booking. Your Movie. Your Moment. Your Universe." />
+  <title>CineVerse — Your Movie. Your Moment. Your Universe.</title>
+
+  <!-- Google Fonts: Poppins for headings, Inter for body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Main Stylesheet & Script -->
+  <link rel="stylesheet" href="Homepage.css" />
+  <script src="Homepage.js" defer></script>
+</head>
+
+<body>
+  <!-- Keyboard Accessibility Skip Link -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- =========================================================
+       A. NAVIGATION BAR (Sticky Glassmorphism Header)
+  ========================================================== -->
+  <header class="site-header" id="site-header">
+    <nav class="navbar container" aria-label="Primary Navigation">
+      <!-- CineVerse Logo -->
+      <a href="#home" class="brand-logo" aria-label="CineVerse Home">
+        <img src="images/CineVerse-Logo.svg" alt="CineVerse — Beyond the Screen" class="brand-logo-img" />
+      </a>
+
+      <!-- Primary Navigation Links -->
+      <ul class="nav-links" id="primary-nav">
+        <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+        <li><a href="#genres" class="nav-link" data-section="genres">Movies</a></li>
+        <li><a href="#trending" class="nav-link" data-section="trending">Now Showing</a></li>
+        <li><a href="#coming-soon" class="nav-link" data-section="coming-soon">Coming Soon</a></li>
+        <li class="nav-auth-mobile">
+          <button type="button" class="btn btn-nav-auth js-auth-trigger" data-placeholder-route="login.html">
+            Login / Sign Up
+          </button>
+        </li>
+      </ul>
+
+      <!-- Navbar Action Controls -->
+      <div class="nav-actions">
+        <button type="button" class="icon-btn" id="search-toggle-btn" aria-label="Open movie search"
+          aria-expanded="false" aria-controls="search-bar-panel">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <line x1="20" y1="20" x2="16.2" y2="16.2" />
+          </svg>
+        </button>
+
+        <button type="button" class="btn btn-nav-auth" id="auth-placeholder-btn" data-placeholder-route="login.html">
+          Login / Sign Up
+        </button>
+
+        <!-- Mobile Hamburger Menu Toggle -->
+        <button type="button" class="hamburger-btn" id="hamburger-btn" aria-label="Open navigation menu"
+          aria-expanded="false" aria-controls="primary-nav">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Collapsible Search Bar Panel -->
+    <div class="search-panel" id="search-bar-panel" hidden>
+      <div class="container search-panel-inner">
+        <label for="movie-search-input" class="sr-only">Search CineVerse movies</label>
+        <div class="search-input-wrap">
+          <svg class="search-field-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+            stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <line x1="20" y1="20" x2="16.2" y2="16.2" />
+          </svg>
+          <input type="search" id="movie-search-input" class="search-input"
+            placeholder="Search movies by title or genre (e.g., Sci-Fi, Neon Protocol)..." autocomplete="off" />
+          <button type="button" class="search-close-btn" id="search-close-btn" aria-label="Close search">
+            &times;
+          </button>
+        </div>
+        <div class="search-results" id="search-results" aria-live="polite"></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- =========================================================
+         B. HERO SECTION (Featured Movie Banner)
+    ========================================================== -->
+    <section id="home" class="hero" aria-label="Featured Movie">
+      <div class="hero-media">
+        <img src="images/hero-featured.jpg"
+          alt="Chrono Meridian — lone futuristic explorer overlooking a glowing orbital city and midnight-blue nebula"
+          class="hero-bg-img" />
+        <div class="hero-overlay" aria-hidden="true"></div>
+      </div>
+
+      <div class="container hero-container">
+        <div class="hero-content">
+          <p class="hero-tagline">Your Movie. Your Moment. Your Universe.</p>
+
+          <div class="hero-badge-row">
+            <span class="featured-badge">FEATURED MOVIE</span>
+            <span class="hero-format-pill">IMAX &bull; DOLBY ATMOS</span>
+          </div>
+
+          <h1 class="hero-title">Chrono Meridian</h1>
+
+          <div class="hero-meta" aria-label="Movie details">
+            <span class="meta-item">Sci-Fi &bull; Action</span>
+            <span class="meta-dot" aria-hidden="true"></span>
+            <span class="meta-item">2026</span>
+            <span class="meta-dot" aria-hidden="true"></span>
+            <span class="meta-rating" aria-label="IMDb rating 8.9 out of 10">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+              </svg>
+              8.9 / 10
+            </span>
+          </div>
+
+          <p class="hero-description">
+            When a deep-space navigator intercepts a fractured time beacon orbiting a dying star,
+            she has forty-eight hours to rewrite humanity&rsquo;s fate before the meridian collapses.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#trending" class="btn btn-primary" id="hero-explore-btn">
+              Explore Movies
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+
+            <button type="button" class="btn btn-secondary" id="watch-trailer-btn" data-movie-id="chrono-meridian">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <polygon points="6,4 20,12 6,20" />
+              </svg>
+              Watch Trailer
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         C. TRENDING MOVIES SECTION ("Trending This Week")
+    ========================================================== -->
+    <section id="trending" class="section trending-section" aria-labelledby="trending-heading">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-eyebrow">NOW SHOWING IN CINEMAS</span>
+            <h2 id="trending-heading" class="section-title">Trending This Week</h2>
+          </div>
+
+          <div class="section-controls">
+            <div class="carousel-nav" role="group" aria-label="Trending movies carousel controls">
+              <button type="button" class="carousel-btn" id="trending-prev-btn"
+                aria-label="Scroll trending movies left">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button type="button" class="carousel-btn" id="trending-next-btn"
+                aria-label="Scroll trending movies right">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+
+            <a href="movies.html" class="view-all-link" data-placeholder-link="movies.html">
+              View All Movies
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Horizontal Scrollable Carousel / Responsive Grid -->
+        <div class="carousel-track" id="trending-carousel" tabindex="0" aria-label="Trending movies list">
+          <!-- Movie Card 1 -->
+          <article class="movie-card" data-movie-id="neon-protocol" data-genre="Sci-Fi Thriller">
+            <div class="poster-wrap">
+              <img src="images/poster-neon-protocol.jpg"
+                alt="Neon Protocol movie poster showing a futuristic detective in a rain-soaked neon city"
+                class="movie-poster" loading="lazy" />
+              <span class="rating-badge" aria-label="IMDb rating 8.8">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+                </svg>
+                8.8
+              </span>
+            </div>
+            <div class="movie-card-body">
+              <h3 class="movie-title">Neon Protocol</h3>
+              <p class="movie-genre">Sci-Fi &bull; Thriller</p>
+              <div class="card-actions">
+                <button type="button" class="btn btn-card-primary movie-action-btn" data-movie-id="neon-protocol"
+                  data-action="book">
+                  Book Now
+                </button>
+                <button type="button" class="btn btn-card-ghost movie-action-btn" data-movie-id="neon-protocol"
+                  data-action="details">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Movie Card 2 -->
+          <article class="movie-card" data-movie-id="starlight-drift" data-genre="Sci-Fi Adventure">
+            <div class="poster-wrap">
+              <img src="images/poster-starlight-drift.svg"
+                alt="Starlight Drift movie poster featuring a spacecraft entering a glowing violet wormhole"
+                class="movie-poster" loading="lazy" />
+              <span class="rating-badge" aria-label="IMDb rating 8.6">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+                </svg>
+                8.6
+              </span>
+            </div>
+            <div class="movie-card-body">
+              <h3 class="movie-title">Starlight Drift</h3>
+              <p class="movie-genre">Sci-Fi &bull; Adventure</p>
+              <div class="card-actions">
+                <button type="button" class="btn btn-card-primary movie-action-btn" data-movie-id="starlight-drift"
+                  data-action="book">
+                  Book Now
+                </button>
+                <button type="button" class="btn btn-card-ghost movie-action-btn" data-movie-id="starlight-drift"
+                  data-action="details">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Movie Card 3 -->
+          <article class="movie-card" data-movie-id="shadow-requiem" data-genre="Action Thriller">
+            <div class="poster-wrap">
+              <img src="images/poster-shadow-requiem.svg"
+                alt="Shadow Requiem movie poster showing a tactical silhouette above a midnight skyline"
+                class="movie-poster" loading="lazy" />
+              <span class="rating-badge" aria-label="IMDb rating 8.4">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+                </svg>
+                8.4
+              </span>
+            </div>
+            <div class="movie-card-body">
+              <h3 class="movie-title">Shadow Requiem</h3>
+              <p class="movie-genre">Action &bull; Thriller</p>
+              <div class="card-actions">
+                <button type="button" class="btn btn-card-primary movie-action-btn" data-movie-id="shadow-requiem"
+                  data-action="book">
+                  Book Now
+                </button>
+                <button type="button" class="btn btn-card-ghost movie-action-btn" data-movie-id="shadow-requiem"
+                  data-action="details">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Movie Card 4 -->
+          <article class="movie-card" data-movie-id="luminous-vale" data-genre="Animation Adventure">
+            <div class="poster-wrap">
+              <img src="images/poster-luminous-vale.jpg"
+                alt="Luminous Vale animated adventure poster of a young explorer in a glowing forest"
+                class="movie-poster" loading="lazy" />
+              <span class="rating-badge" aria-label="IMDb rating 8.7">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+                </svg>
+                8.7
+              </span>
+            </div>
+            <div class="movie-card-body">
+              <h3 class="movie-title">Luminous Vale</h3>
+              <p class="movie-genre">Animation &bull; Adventure</p>
+              <div class="card-actions">
+                <button type="button" class="btn btn-card-primary movie-action-btn" data-movie-id="luminous-vale"
+                  data-action="book">
+                  Book Now
+                </button>
+                <button type="button" class="btn btn-card-ghost movie-action-btn" data-movie-id="luminous-vale"
+                  data-action="details">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Movie Card 5 -->
+          <article class="movie-card" data-movie-id="crimson-echo" data-genre="Horror Thriller">
+            <div class="poster-wrap">
+              <img src="images/poster-crimson-echo.svg"
+                alt="Crimson Echo horror thriller poster of a cliffside observatory in a midnight storm"
+                class="movie-poster" loading="lazy" />
+              <span class="rating-badge" aria-label="IMDb rating 8.1">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+                </svg>
+                8.1
+              </span>
+            </div>
+            <div class="movie-card-body">
+              <h3 class="movie-title">Crimson Echo</h3>
+              <p class="movie-genre">Horror &bull; Thriller</p>
+              <div class="card-actions">
+                <button type="button" class="btn btn-card-primary movie-action-btn" data-movie-id="crimson-echo"
+                  data-action="book">
+                  Book Now
+                </button>
+                <button type="button" class="btn btn-card-ghost movie-action-btn" data-movie-id="crimson-echo"
+                  data-action="details">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Movie Card 6 -->
+          <article class="movie-card" data-movie-id="velocity-zero" data-genre="Action Sci-Fi">
+            <div class="poster-wrap">
+              <img src="images/poster-velocity-zero.svg"
+                alt="Velocity Zero movie poster featuring a hypercar speeding down a neon cyber highway"
+                class="movie-poster" loading="lazy" />
+              <span class="rating-badge" aria-label="IMDb rating 8.3">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+                </svg>
+                8.3
+              </span>
+            </div>
+            <div class="movie-card-body">
+              <h3 class="movie-title">Velocity Zero</h3>
+              <p class="movie-genre">Action &bull; Sci-Fi</p>
+              <div class="card-actions">
+                <button type="button" class="btn btn-card-primary movie-action-btn" data-movie-id="velocity-zero"
+                  data-action="book">
+                  Book Now
+                </button>
+                <button type="button" class="btn btn-card-ghost movie-action-btn" data-movie-id="velocity-zero"
+                  data-action="details">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         D. UPCOMING RELEASES SECTION ("Coming Soon")
+    ========================================================== -->
+    <section id="coming-soon" class="section upcoming-section" aria-labelledby="upcoming-heading">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-eyebrow cyan-eyebrow">FUTURE PREMIERES</span>
+            <h2 id="upcoming-heading" class="section-title">Coming Soon</h2>
+          </div>
+
+          <a href="coming-soon.html" class="view-all-link" data-placeholder-link="coming-soon.html">
+            Release Calendar
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Distinct Horizontal Split Card Grid for Coming Soon -->
+        <div class="upcoming-grid">
+          <!-- Upcoming Card 1 -->
+          <article class="upcoming-card" data-movie-id="quantum-heist">
+            <div class="upcoming-poster-wrap">
+              <img src="images/poster-quantum-heist.jpg"
+                alt="The Quantum Heist poster showing a futuristic vault with glowing laser beams"
+                class="upcoming-poster" loading="lazy" />
+            </div>
+            <div class="upcoming-info">
+              <span class="release-date-pill">Dec 18, 2026</span>
+              <h3 class="upcoming-title">The Quantum Heist</h3>
+              <p class="upcoming-genre">Sci-Fi &bull; Action</p>
+              <p class="upcoming-blurb">
+                An elite team of temporal thieves targets an off-world archive locked inside a folding quantum vault.
+              </p>
+              <button type="button" class="btn btn-upcoming-details movie-action-btn" data-movie-id="quantum-heist"
+                data-action="details">
+                View Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Upcoming Card 2 -->
+          <article class="upcoming-card" data-movie-id="arctic-abyss">
+            <div class="upcoming-poster-wrap">
+              <img src="images/poster-arctic-abyss.jpg"
+                alt="Arctic Abyss poster depicting a deep-sea submersible illuminating glowing underwater ruins"
+                class="upcoming-poster" loading="lazy" />
+            </div>
+            <div class="upcoming-info">
+              <span class="release-date-pill">Jan 15, 2027</span>
+              <h3 class="upcoming-title">Arctic Abyss</h3>
+              <p class="upcoming-genre">Thriller &bull; Adventure</p>
+              <p class="upcoming-blurb">
+                Beneath four miles of polar ice, a research crew awakens a submerged signal older than civilization.
+              </p>
+              <button type="button" class="btn btn-upcoming-details movie-action-btn" data-movie-id="arctic-abyss"
+                data-action="details">
+                View Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Upcoming Card 3 -->
+          <article class="upcoming-card" data-movie-id="midnight-encore">
+            <div class="upcoming-poster-wrap">
+              <img src="images/poster-midnight-encore.jpg"
+                alt="Midnight Encore poster showing a stylish rooftop jazz lounge overlooking midnight city lights"
+                class="upcoming-poster" loading="lazy" />
+            </div>
+            <div class="upcoming-info">
+              <span class="release-date-pill">Feb 05, 2027</span>
+              <h3 class="upcoming-title">Midnight Encore</h3>
+              <p class="upcoming-genre">Comedy &bull; Drama</p>
+              <p class="upcoming-blurb">
+                Over one chaotic New Year&rsquo;s Eve in a rooftop club, a washed-up composer gets one last encore.
+              </p>
+              <button type="button" class="btn btn-upcoming-details movie-action-btn" data-movie-id="midnight-encore"
+                data-action="details">
+                View Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Upcoming Card 4 -->
+          <article class="upcoming-card" data-movie-id="astral-horizon">
+            <div class="upcoming-poster-wrap">
+              <img src="images/poster-starlight-drift.svg"
+                alt="Astral Horizon teaser artwork of a cosmic starscape and radiant nebula" class="upcoming-poster"
+                loading="lazy" />
+            </div>
+            <div class="upcoming-info">
+              <span class="release-date-pill">Feb 26, 2027</span>
+              <h3 class="upcoming-title">Astral Horizon</h3>
+              <p class="upcoming-genre">Adventure &bull; Drama</p>
+              <p class="upcoming-blurb">
+                Two estranged siblings chart a one-way voyage across the outer rim to rescue a lost colony ship.
+              </p>
+              <button type="button" class="btn btn-upcoming-details movie-action-btn" data-movie-id="astral-horizon"
+                data-action="details">
+                View Details
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         E. BROWSE BY GENRE SECTION
+    ========================================================== -->
+    <section id="genres" class="section genres-section" aria-labelledby="genres-heading">
+      <div class="container">
+        <div class="section-header section-header-center">
+          <span class="section-eyebrow">CURATED UNIVERSES</span>
+          <h2 id="genres-heading" class="section-title">Browse by Genre</h2>
+          <p class="section-subtitle">
+            Pick a genre to filter CineVerse highlights or preview the Movies catalog route.
+          </p>
+        </div>
+
+        <div class="genres-grid" role="list">
+          <button type="button" class="genre-card" data-genre="Action" role="listitem">
+            <span class="genre-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </span>
+            <span class="genre-name">Action</span>
+            <span class="genre-count">High-Octane Hits</span>
+          </button>
+
+          <button type="button" class="genre-card" data-genre="Adventure" role="listitem">
+            <span class="genre-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+              </svg>
+            </span>
+            <span class="genre-name">Adventure</span>
+            <span class="genre-count">Epic Expeditions</span>
+          </button>
+
+          <button type="button" class="genre-card" data-genre="Comedy" role="listitem">
+            <span class="genre-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                <line x1="9" y1="9" x2="9.01" y2="9" />
+                <line x1="15" y1="9" x2="15.01" y2="9" />
+              </svg>
+            </span>
+            <span class="genre-name">Comedy</span>
+            <span class="genre-count">Feel-Good Laughs</span>
+          </button>
+
+          <button type="button" class="genre-card" data-genre="Drama" role="listitem">
+            <span class="genre-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+            </span>
+            <span class="genre-name">Drama</span>
+            <span class="genre-count">Acclaimed Stories</span>
+          </button>
+
+          <button type="button" class="genre-card" data-genre="Horror" role="listitem">
+            <span class="genre-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 10h.01" />
+                <path d="M15 10h.01" />
+                <path d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z" />
+              </svg>
+            </span>
+            <span class="genre-name">Horror</span>
+            <span class="genre-count">Midnight Chills</span>
+          </button>
+
+          <button type="button" class="genre-card" data-genre="Sci-Fi" role="listitem">
+            <span class="genre-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(30 12 12)" />
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-30 12 12)" />
+              </svg>
+            </span>
+            <span class="genre-name">Sci-Fi</span>
+            <span class="genre-count">Future Worlds</span>
+          </button>
+
+          <button type="button" class="genre-card" data-genre="Animation" role="listitem">
+            <span class="genre-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </span>
+            <span class="genre-name">Animation</span>
+            <span class="genre-count">Visual Magic</span>
+          </button>
+
+          <button type="button" class="genre-card" data-genre="Thriller" role="listitem">
+            <span class="genre-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </span>
+            <span class="genre-name">Thriller</span>
+            <span class="genre-count">Edge-of-Seat</span>
+          </button>
+        </div>
+
+        <!-- Interactive Genre Selection Feedback Banner -->
+        <div class="genre-feedback" id="genre-feedback" aria-live="polite" hidden></div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         F. PROMOTIONAL CALL-TO-ACTION SECTION
+    ========================================================== -->
+    <section class="section cta-section" aria-labelledby="cta-heading">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-glow cta-glow-purple" aria-hidden="true"></div>
+          <div class="cta-glow cta-glow-cyan" aria-hidden="true"></div>
+
+          <div class="cta-content">
+            <span class="section-eyebrow cyan-eyebrow">CINEVERSE EXPERIENCE</span>
+            <h2 id="cta-heading" class="cta-title">Your Next Movie Night Starts Here.</h2>
+            <p class="cta-description">
+              Laser projection, spatial sound, and effortless seat selection &mdash; step into a cinema platform built
+              for unforgettable premieres.
+            </p>
+            <a href="#trending" class="btn btn-primary cta-btn">
+              Explore Movies
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       G. FOOTER
+  ========================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <!-- Brand & Description -->
+      <div class="footer-brand">
+        <a href="#home" class="brand-logo" aria-label="CineVerse Back to Top">
+          <img src="images/CineVerse-Logo.svg" alt="CineVerse — Beyond the Screen" class="brand-logo-img footer-logo-img" />
+        </a>
+        <p class="footer-tagline">Your Movie. Your Moment. Your Universe.</p>
+        <p class="footer-description">
+          A futuristic cinema discovery and ticket booking platform connecting audiences with trending blockbusters and
+          upcoming premieres.
+        </p>
+      </div>
+
+      <!-- Quick Navigation Links -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Explore</h3>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="movies.html" data-placeholder-link="movies.html">Movies</a></li>
+          <li><a href="#trending">Now Showing</a></li>
+          <li><a href="#coming-soon">Coming Soon</a></li>
+        </ul>
+      </div>
+
+      <!-- Information & Legal Links -->
+      <div class="footer-col">
+        <h3 class="footer-heading">CineVerse</h3>
+        <ul class="footer-links">
+          <li><a href="about.html" data-placeholder-link="about.html">About Us</a></li>
+          <li><a href="contact.html" data-placeholder-link="contact.html">Contact Us</a></li>
+          <li><a href="privacy.html" data-placeholder-link="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html" data-placeholder-link="terms.html">Terms and Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Connect</h3>
+        <p class="footer-social-note">Follow premieres, trailers, and IMAX events.</p>
+        <div class="social-links">
+          <a href="#social-x" class="social-btn" aria-label="CineVerse on X" data-placeholder-link="social/x">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href="#social-instagram" class="social-btn" aria-label="CineVerse on Instagram"
+            data-placeholder-link="social/instagram">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </a>
+          <a href="#social-youtube" class="social-btn" aria-label="CineVerse on YouTube"
+            data-placeholder-link="social/youtube">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path
+                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 CineVerse. All rights reserved.</p>
+        <p class="footer-credit">Neon Cyber Cinema &times; Midnight Blue Experience</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       INTERACTIVE DETAILS & PLACEHOLDER ROUTE MODAL
+  ========================================================== -->
+  <div class="modal-backdrop" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-dialog">
+      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+        &times;
+      </button>
+      <div class="modal-body" id="modal-body">
+        <!-- Populated dynamically by script.js -->
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

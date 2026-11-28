@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+  <defs>
+    <linearGradient id="stormSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#070815"/>
+      <stop offset="50%" stop-color="#22133D"/>
+      <stop offset="100%" stop-color="#090B1A"/>
+    </linearGradient>
+    <radialGradient id="crimsonAura" cx="50%" cy="46%" r="44%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.6"/>
+      <stop offset="55%" stop-color="#4C1D95" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#090B1A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="900" fill="url(#stormSky)"/>
+  <rect width="600" height="900" fill="url(#crimsonAura)"/>
+  <!-- Lightning Bolt -->
+  <polyline points="420,40 375,165 415,175 350,320" fill="none" stroke="#C4B5FD" stroke-width="3" opacity="0.85"/>
+  <!-- Soundwave Echo Rings -->
+  <g fill="none" stroke="#00D4FF" opacity="0.32">
+    <circle cx="300" cy="430" r="95" stroke-width="2"/>
+    <circle cx="300" cy="430" r="155" stroke-width="1.5" stroke="#8B5CF6"/>
+    <circle cx="300" cy="430" r="220" stroke-width="1"/>
+  </g>
+  <!-- Cliffside & Observatory -->
+  <polygon points="0,700 180,610 420,610 600,710 600,900 0,900" fill="#070814"/>
+  <g transform="translate(300,500)">
+    <path d="M-85,110 L-75,-10 L75,-10 L85,110 Z" fill="#101329" stroke="#2D325A"/>
+    <path d="M-72,-10 A72,72 0 0 1 72,-10 Z" fill="#171A32" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="-14" y="42" width="28" height="68" rx="14" fill="#00D4FF" opacity="0.85"/>
+  </g>
+</svg>
