@@ -87,5 +87,26 @@
   </footer>
 
   <script src="../js/booking.js"></script>
+  <!-- Seat Selection Module -->
+  <section class="container seat-selection">
+    <div id="seatGrid" class="seat-grid" aria-label="Seat map"></div>
+    <div class="selection-summary">
+      <p id="totalPrice">Total: Rs. 0</p>
+      <p id="seatSelectionErrorMsg" class="error-msg" hidden>Select at least one seat!</p>
+      <button id="nextToConfirmBtn" class="btn btn-primary">Next</button>
+    </div>
+  </section>
+
+  <!-- Booking Confirmation Modal -->
+  <div id="bookingModal" class="modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-content">
+      <h2>Booking Confirmed</h2>
+      <p id="modalSeats"></p>
+      <p id="modalCinema"></p>
+      <p id="modalDateTime"></p>
+      <p id="modalTotal"></p>
+      <button id="modalCloseBtn" class="btn btn-secondary">Close</button>
+    </div>
+  </div>
 </body>
 </html>

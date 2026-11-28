@@ -459,6 +459,112 @@
   }
 
   // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // 7. Seat Selection Page Logic
+  // ---------------------------------------------------------------------------
+
+  function initSeatSelection() {
+    const seatGrid = document.getElementById('seatGrid');
+    const totalPriceEl = document.getElementById('totalPrice');
+    const errorMsg = document.getElementById('seatSelectionErrorMsg');
+    const nextBtn = document.getElementById('nextToConfirmBtn');
+    const modal = document.getElementById('bookingModal');
+    const modalSeats = document.getElementById('modalSeats');
+    const modalCinema = document.getElementById('modalCinema');
+    const modalDateTime = document.getElementById('modalDateTime');
+    const modalTotal = document.getElementById('modalTotal');
+    const modalClose = document.getElementById('modalCloseBtn');
+
+    const PRICE_PER_SEAT = 600;
+    const MAX_SEATS = 8;
+    const rows = ['A','B','C','D','E','F'];
+    const cols = 8;
+    const bookedSeats = ['C3', 'D5', 'E1']; // preset booked seats
+
+    // Load persisted selection
+    const savedState = getSavedBookingState() || {};
+    let selectedSeats = savedState.seats || [];
+
+    function renderGrid() {
+      seatGrid.innerHTML = '';
+      rows.forEach(row => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'seat-row';
+        for (let i = 1; i <= cols; i++) {
+          const seatLabel = row + i;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'seat';
+          btn.dataset.seat = seatLabel;
+          btn.setAttribute('aria-label', `Seat ${seatLabel}`);
+          btn.textContent = seatLabel;
+          if (bookedSeats.includes(seatLabel)) {
+            btn.classList.add('booked');
+            btn.disabled = true;
+            btn.setAttribute('aria-pressed', 'false');
+          } else if (selectedSeats.includes(seatLabel)) {
+            btn.classList.add('selected');
+            btn.setAttribute('aria-pressed', 'true');
+          } else {
+            btn.setAttribute('aria-pressed', 'false');
+          }
+          btn.addEventListener('click', () => toggleSeat(seatLabel, btn));
+          rowDiv.appendChild(btn);
+        }
+        seatGrid.appendChild(rowDiv);
+      });
+      updateTotal();
+    }
+
+    function toggleSeat(seat, button) {
+      const idx = selectedSeats.indexOf(seat);
+      if (idx > -1) {
+        selectedSeats.splice(idx, 1);
+        button.classList.remove('selected');
+        button.setAttribute('aria-pressed', 'false');
+      } else {
+        if (selectedSeats.length >= MAX_SEATS) {
+          return; // max reached
+        }
+        selectedSeats.push(seat);
+        button.classList.add('selected');
+        button.setAttribute('aria-pressed', 'true');
+      }
+      saveSelection();
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const total = selectedSeats.length * PRICE_PER_SEAT;
+      totalPriceEl.textContent = `Total: Rs. ${total}`;
+    }
+
+    function saveSelection() {
+      const state = getSavedBookingState() || {};
+      state.seats = selectedSeats;
+      try { localStorage.setItem(STORAGE_KEYS.BOOKING_STATE, JSON.stringify(state)); } catch (e) {}
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (selectedSeats.length === 0) {
+        errorMsg.hidden = false;
+        return;
+      }
+      errorMsg.hidden = true;
+      modalSeats.textContent = `Seats: ${selectedSeats.join(', ')}`;
+      const saved = getSavedBookingState();
+      modalCinema.textContent = `Cinema: ${saved?.cinemaName || ''}`;
+      modalDateTime.textContent = `Date & Time: ${saved?.dateLabel || ''} ${saved?.timeLabel || ''}`;
+      modalTotal.textContent = `Total: Rs. ${selectedSeats.length * PRICE_PER_SEAT}`;
+      modal.hidden = false;
+    });
+
+    modalClose.addEventListener('click', () => { modal.hidden = true; });
+
+    renderGrid();
+  }
+
+  // ---------------------------------------------------------------------------
   // 7. Show Timings Page (pages/show-timings.html)
   // ---------------------------------------------------------------------------
 
@@ -667,5 +773,6 @@
     initSelectCinemaPage();
     initSummaryContext();    // safe no-op on pages without #bookingContextSummary
     initShowTimingsPage();   // runs only when #showTimingsPage exists
+    initSeatSelection();    // runs only when seat-selection elements exist
   });
 })();
