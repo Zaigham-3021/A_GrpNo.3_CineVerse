@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seat Selection | CineVerse</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- Site Header & Responsive Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="../index.html" class="brand-logo" aria-label="CineVerse Home">
+        <span class="brand-badge" aria-hidden="true">CV</span>
+        <span>Cine<span class="brand-highlight">Verse</span></span>
+      </a>
+
+      <button
+        type="button"
+        id="hamburgerBtn"
+        class="hamburger-btn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <nav aria-label="Primary Navigation">
+        <ul id="primaryNav" class="nav-links">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="select-cinema.html" class="nav-link">Select Cinema</a></li>
+          <li><a href="show-timings.html" class="nav-link">Show Timings</a></li>
+          <li><a href="seat-selection.html" class="nav-link active">Seat Selection</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Booking Progress Stepper -->
+      <nav class="booking-steps" aria-label="Booking progress">
+        <div class="step-item completed">
+          <span class="step-number">&#10003;</span>
+          <span>Select Cinema</span>
+        </div>
+        <span class="step-divider" aria-hidden="true">/</span>
+        <div class="step-item completed">
+          <span class="step-number">&#10003;</span>
+          <span>Show Timings</span>
+        </div>
+        <span class="step-divider" aria-hidden="true">/</span>
+        <div class="step-item active" aria-current="step">
+          <span class="step-number">3</span>
+          <span>Seat Selection</span>
+        </div>
+      </nav>
+
+      <!-- Page Hero -->
+      <section class="page-hero">
+        <div class="hero-text">
+          <h1>Seat Selection</h1>
+          <p id="bookingContextSummary">Loading your selected cinema...</p>
+        </div>
+        <div class="landing-actions">
+          <a href="show-timings.html" class="btn btn-secondary">Back to Show Timings</a>
+        </div>
+      </section>
+
+      <!-- Seat Legend -->
+      <section class="seat-legend-section" aria-label="Seat legend">
+        <h2 class="seat-legend-title">Seat Legend</h2>
+        <ul class="seat-legend-list">
+          <li><span class="seat available" aria-hidden="true"></span> Available</li>
+          <li><span class="seat booked"    aria-hidden="true"></span> Booked</li>
+          <li><span class="seat selected"  aria-hidden="true"></span> Selected</li>
+        </ul>
+        <div class="screen-bar" role="img" aria-label="Cinema screen">SCREEN</div>
+      </section>
+
+      <!-- Seat Grid -->
+      <section class="seat-selection-section">
+        <div
+          id="seatGrid"
+          class="seat-grid"
+          role="group"
+          aria-label="Seat map — rows A to F, 8 seats per row"
+        ></div>
+
+        <!-- Summary & Actions -->
+        <div class="selection-summary">
+          <p id="totalPrice" class="total-price">Total: Rs. 0</p>
+          <p
+            id="seatSelectionErrorMsg"
+            class="error-msg"
+            role="alert"
+            aria-live="polite"
+            hidden
+          >Select at least one seat!</p>
+          <button id="nextToConfirmBtn" class="btn btn-primary">Confirm Booking</button>
+        </div>
+      </section>
+
+    </div><!-- /.container -->
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 CineVerse &mdash; Cinema Ticket Booking.</p>
+      <p>Step 3 of 3: Seat Selection</p>
+    </div>
+  </footer>
+
+  <!-- Booking Confirmation Modal (hidden by default) -->
+  <div
+    id="bookingModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalHeading"
+    hidden
+  >
+    <div class="modal-content">
+      <h2 id="modalHeading">Booking Confirmed</h2>
+      <p id="modalSeats"></p>
+      <p id="modalCinema"></p>
+      <p id="modalDateTime"></p>
+      <p id="modalTotal"></p>
+      <button id="modalCloseBtn" class="btn btn-secondary">Close</button>
+    </div>
+  </div>
+
+  <script src="../js/booking.js"></script>
+</body>
+</html>

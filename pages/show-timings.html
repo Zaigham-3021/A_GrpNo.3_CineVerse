@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Show Timings | CineVerse</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- Site Header & Responsive Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="../index.html" class="brand-logo" aria-label="CineVerse Home">
+        <span class="brand-badge" aria-hidden="true">CV</span>
+        <span>Cine<span class="brand-highlight">Verse</span></span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        type="button"
+        id="hamburgerBtn"
+        class="hamburger-btn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <nav aria-label="Primary Navigation">
+        <ul id="primaryNav" class="nav-links">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="select-cinema.html" class="nav-link">Select Cinema</a></li>
+          <li><a href="show-timings.html" class="nav-link active">Show Timings</a></li>
+          <li><a href="seat-selection.html" class="nav-link">Seat Selection</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" id="showTimingsPage">
+    <div class="container">
+      <!-- Booking Progress Indicator -->
+      <nav class="booking-steps" aria-label="Booking progress">
+        <div class="step-item completed">
+          <span class="step-number">&#10003;</span>
+          <span>Select Cinema</span>
+        </div>
+        <span class="step-divider" aria-hidden="true">/</span>
+        <div class="step-item active" aria-current="step">
+          <span class="step-number">2</span>
+          <span>Show Timings</span>
+        </div>
+        <span class="step-divider" aria-hidden="true">/</span>
+        <div class="step-item">
+          <span class="step-number">3</span>
+          <span>Seat Selection</span>
+        </div>
+      </nav>
+
+      <!-- Page Heading -->
+      <section class="page-hero" aria-labelledby="showTimingsHeading">
+        <div class="hero-text">
+          <h1 id="showTimingsHeading">Choose Movie, Date &amp; Showtime</h1>
+          <p>
+            Review your chosen theater, pick a convenient date and time slot, and
+            proceed to seat selection.
+          </p>
+        </div>
+      </section>
+
+      <!-- Selected Cinema Context Banner (populated from localStorage) -->
+      <section
+        id="selectedCinemaBanner"
+        class="cinema-context-card"
+        aria-label="Selected cinema details"
+      >
+        <div class="cinema-context-info">
+          <h2 id="selectedCinemaTitle">Loading selected cinema...</h2>
+          <p id="selectedCinemaMeta">Checking your saved selection...</p>
+        </div>
+        <a id="changeCinemaLink" href="select-cinema.html" class="btn btn-secondary">
+          Change Cinema
+        </a>
+      </section>
+
+      <!-- Main Two-Column Show Timings Layout -->
+      <div class="timings-layout">
+        <!-- Left Column: Movie Poster & Details -->
+        <aside class="movie-poster-card" aria-labelledby="movieTitle">
+          <div class="movie-poster-frame">
+            <img
+              id="moviePosterImg"
+              src="../images/movie-poster.svg"
+              alt="Featured movie poster"
+            />
+          </div>
+          <div class="movie-details-body">
+            <h2 id="movieTitle" class="movie-title">Loading movie...</h2>
+            <div id="movieMetaBadges" class="movie-badges"></div>
+            <p id="movieSynopsis" class="movie-synopsis"></p>
+          </div>
+        </aside>
+
+        <!-- Right Column: Movie Switcher, Date Selector & Time Slots -->
+        <section class="schedule-panel" aria-label="Showtime Schedule">
+          <!-- Now Showing Movie Selector -->
+          <div>
+            <div class="selector-group-header">
+              <h2>1. Now Showing</h2>
+              <span class="selector-hint">Choose a movie</span>
+            </div>
+            <div id="movieSwitcher" class="movie-switcher" role="group" aria-label="Select movie"></div>
+          </div>
+
+          <!-- Interactive Date Selector Buttons (rendered from JS data) -->
+          <div>
+            <div class="selector-group-header">
+              <h2>2. Select Date</h2>
+              <span class="selector-hint">Required</span>
+            </div>
+            <div id="dateSelector" class="date-grid" role="group" aria-label="Select show date"></div>
+          </div>
+
+          <!-- Showtime Slot Buttons (rendered from JS data) -->
+          <div>
+            <div class="selector-group-header">
+              <h2>3. Select Showtime</h2>
+              <span class="selector-hint">Required</span>
+            </div>
+            <div id="timeSlotGrid" class="timeslot-grid" role="group" aria-label="Select showtime"></div>
+          </div>
+
+          <!-- Live Selection Summary -->
+          <div id="timingSelectionSummary" class="selection-summary-box" aria-live="polite">
+            <span class="summary-field"><strong>Movie:</strong> <span id="summaryMovie">-</span></span>
+            <span class="summary-field"><strong>Date:</strong> <span id="summaryDate">Not selected</span></span>
+            <span class="summary-field"><strong>Showtime:</strong> <span id="summaryTime">Not selected</span></span>
+          </div>
+
+          <!-- Inline Validation Message -->
+          <p id="timingValidationMsg" class="validation-message" role="alert" hidden></p>
+
+          <!-- Navigation Actions -->
+          <div class="schedule-actions">
+            <a href="select-cinema.html" class="btn btn-secondary">&larr; Back to Cinemas</a>
+            <button type="button" id="nextToSeatsBtn" class="btn btn-primary">
+              Next: Seat Selection &rarr;
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 CineVerse &mdash; Cinema Ticket Booking.</p>
+      <p>Step 2 of 3: Show Timings</p>
+    </div>
+  </footer>
+
+  <script src="../js/booking.js"></script>
+</body>
+</html>
