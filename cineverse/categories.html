@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineVerse — Categories</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="categories">
+  <header class="site-header">
+    <nav class="nav-container" aria-label="Primary Navigation">
+      <a href="my-bookings.html" class="logo">
+        <svg class="logo-classic-emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="reelGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fde68a"/>
+              <stop offset="50%" stop-color="#fbbf24"/>
+              <stop offset="100%" stop-color="#d97706"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="28" fill="#07152b" stroke="url(#reelGold)" stroke-width="3"/>
+          <circle cx="32" cy="32" r="22" fill="none" stroke="rgba(56,189,248,0.45)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <circle cx="32" cy="14" r="4.2" fill="url(#reelGold)"/>
+          <circle cx="32" cy="50" r="4.2" fill="url(#reelGold)"/>
+          <circle cx="14" cy="32" r="4.2" fill="url(#reelGold)"/>
+          <circle cx="50" cy="32" r="4.2" fill="url(#reelGold)"/>
+          <circle cx="19.3" cy="19.3" r="3.6" fill="#38bdf8"/>
+          <circle cx="44.7" cy="19.3" r="3.6" fill="#38bdf8"/>
+          <circle cx="19.3" cy="44.7" r="3.6" fill="#38bdf8"/>
+          <circle cx="44.7" cy="44.7" r="3.6" fill="#38bdf8"/>
+          <circle cx="32" cy="32" r="9.5" fill="#030917" stroke="url(#reelGold)" stroke-width="2"/>
+          <polygon points="29.5,27.5 38,32 29.5,36.5" fill="#fde68a"/>
+        </svg>
+        <span class="logo-wordmark">
+          <span class="logo-title-row">CINE<span class="accent">VERSE</span></span>
+          <span class="logo-tagline">Classic Cinema</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="my-bookings.html" class="nav-link">My Bookings</a></li>
+        <li><a href="categories.html" class="nav-link active">Categories</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+      </ul>
+      <div class="nav-badge">
+        <span class="nav-badge-dot"></span>
+        <span>Pakistan #1 Cinema</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero">
+      <div>
+        <div class="eyebrow">Discover Now Showing</div>
+        <h1 class="page-title">Movie Categories</h1>
+        <p class="page-subtitle">
+          Pick a genre below to explore curated films and reserve your seats instantly at top cinemas across Pakistan.
+        </p>
+      </div>
+      <a href="my-bookings.html" class="btn btn-secondary">View My Bookings</a>
+    </section>
+
+    <!-- 4 Genre Options -->
+    <section aria-label="Genre Options">
+      <div class="category-selector-grid">
+        <button type="button" class="category-option-btn active" data-genre="action">
+          <span class="cat-icon" aria-hidden="true">⚡</span>
+          <span>
+            <span class="cat-name">Action</span>
+            <span class="cat-count">4 Movies</span>
+          </span>
+        </button>
+
+        <button type="button" class="category-option-btn" data-genre="comedy">
+          <span class="cat-icon" aria-hidden="true">😂</span>
+          <span>
+            <span class="cat-name">Comedy</span>
+            <span class="cat-count">4 Movies</span>
+          </span>
+        </button>
+
+        <button type="button" class="category-option-btn" data-genre="horror">
+          <span class="cat-icon" aria-hidden="true">👻</span>
+          <span>
+            <span class="cat-name">Horror</span>
+            <span class="cat-count">4 Movies</span>
+          </span>
+        </button>
+
+        <button type="button" class="category-option-btn" data-genre="romance">
+          <span class="cat-icon" aria-hidden="true">💫</span>
+          <span>
+            <span class="cat-name">Romance</span>
+            <span class="cat-count">4 Movies</span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Selected Category Movies -->
+    <section aria-label="Selected Category Movies">
+      <div class="section-heading-row">
+        <h2 class="section-heading"><span id="selectedGenreHeading">Action</span> Movies</h2>
+      </div>
+      <div id="categoryMoviesGrid" class="movies-grid"></div>
+    </section>
+
+    <!-- Popular Movies Suggestions Block Below -->
+    <section class="popular-section" aria-label="Popular Movies">
+      <div class="section-heading-row">
+        <div>
+          <div class="eyebrow">Top Picks in Pakistan</div>
+          <h2 class="section-heading">Popular <span>Movies</span></h2>
+        </div>
+      </div>
+      <div id="popularMoviesGrid" class="movies-grid"></div>
+    </section>
+  </main>
+
+  <!-- Quick Book Now Modal -->
+  <div id="bookModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle">
+    <div class="modal-card wide">
+      <h3 id="bookModalTitle" class="modal-title">Book Ticket</h3>
+      <p id="bookModalMovie" class="modal-text"></p>
+
+      <div class="form-grid">
+        <div class="form-group full">
+          <label for="bookCinema">Select Cinema</label>
+          <select id="bookCinema" class="form-control"></select>
+        </div>
+        <div class="form-group">
+          <label for="bookDate">Show Date</label>
+          <select id="bookDate" class="form-control">
+            <option value="Dec 06, 2026">Dec 06, 2026</option>
+            <option value="Dec 08, 2026">Dec 08, 2026</option>
+            <option value="Dec 14, 2026">Dec 14, 2026</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bookTime">Showtime</label>
+          <select id="bookTime" class="form-control">
+            <option value="05:30 PM">05:30 PM</option>
+            <option value="08:30 PM">08:30 PM</option>
+            <option value="11:00 PM">11:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="seat-tier-legend" aria-label="Seat Category Prices">
+        <div class="seat-tier-pill tier-a">
+          <span class="tier-name">Category A</span>
+          <span class="tier-price">Rs. 6,000</span>
+        </div>
+        <div class="seat-tier-pill tier-b">
+          <span class="tier-name">Category B</span>
+          <span class="tier-price">Rs. 4,000</span>
+        </div>
+        <div class="seat-tier-pill tier-c">
+          <span class="tier-name">Category C</span>
+          <span class="tier-price">Rs. 3,000</span>
+        </div>
+        <div class="seat-tier-pill tier-d">
+          <span class="tier-name">Category D</span>
+          <span class="tier-price">Rs. 1,500</span>
+        </div>
+      </div>
+
+      <div class="screen-arc">CINEMA SCREEN</div>
+      <div id="seatGrid" class="seat-rows-container"></div>
+
+      <div class="booking-price-summary">
+        <div>
+          <span class="summary-label">Selected Seats</span>
+          <span id="selectedSeatsSummary" class="summary-value">C-03, C-04</span>
+        </div>
+        <div class="summary-total-box">
+          <span class="summary-label">Total Price</span>
+          <span id="bookingTotalPrice" class="summary-total">Rs. 6,000</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btnBookClose" class="btn btn-secondary">Close</button>
+        <button type="button" id="btnBookConfirm" class="btn btn-primary">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    © 2026 CineVerse — Midnight Blue Cinema Experience across Pakistan.
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
