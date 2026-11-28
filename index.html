@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineVerse | Cinema Ticket Booking</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Site Header & Responsive Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo" aria-label="CineVerse Home">
+        <span class="brand-badge" aria-hidden="true">CV</span>
+        <span>Cine<span class="brand-highlight">Verse</span></span>
+      </a>
+
+      <button
+        type="button"
+        id="hamburgerBtn"
+        class="hamburger-btn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <nav aria-label="Primary Navigation">
+        <ul id="primaryNav" class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="pages/select-cinema.html" class="nav-link">Select Cinema</a></li>
+          <li><a href="pages/show-timings.html" class="nav-link">Show Timings</a></li>
+          <li><a href="pages/seat-selection.html" class="nav-link">Seat Selection</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Landing Content -->
+  <main class="main-content">
+    <div class="container">
+      <section class="landing-banner" aria-labelledby="heroHeading">
+        <div>
+          <span class="landing-eyebrow">Cinema Ticket Booking</span>
+          <h1 id="heroHeading">Book Your Next Movie Night with CineVerse</h1>
+          <p>
+            Pick your city, compare nearby cinemas in Islamabad and across Pakistan,
+            choose a showtime, and reserve your seats in seconds.
+          </p>
+          <div class="landing-actions">
+            <a href="pages/select-cinema.html" class="btn btn-primary">Book Tickets Now</a>
+            <a href="pages/show-timings.html" class="btn btn-secondary">View Show Timings</a>
+          </div>
+        </div>
+        <div>
+          <img
+            src="images/centaurus-cinema.svg"
+            alt="CineVerse featured partner cinema illustration"
+          />
+        </div>
+      </section>
+
+      <section class="starter-grid" aria-label="Booking Flow Overview">
+        <article class="info-panel">
+          <h2>1. Select Your Cinema</h2>
+          <p>
+            Filter theaters by city (defaulting to Islamabad), view distance info and
+            screen formats, and save your chosen cinema.
+          </p>
+        </article>
+        <article class="info-panel">
+          <h2>2. Show Timings &amp; Seats</h2>
+          <p>
+            Continue seamlessly to show timings and interactive seat selection with
+            your saved cinema context preserved in <code>localStorage</code>.
+          </p>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 CineVerse &mdash; Group No. 3 IICT Project.</p>
+      <p>Fast, responsive cinema ticket booking.</p>
+    </div>
+  </footer>
+
+  <script src="js/booking.js"></script>
+</body>
+</html>
